@@ -3,13 +3,13 @@ package com.company;
 import java.util.Random;
 
 public class Main {
-    public static int[] heroesHealth = {270, 280 , 250, 300};
+    public static int[] heroesHealth = {270, 280 , 250, 350};
     public static String[] heroesNames = {"LU KANG ", "JAX ", "SCORPION ", "MEDIC "};
     public static int[] heroesStrike = {20,15 ,25, 0};
 
 
     public static String bossName  = "SHAO KAHN ";
-    public static int bossHealth = 700;
+    public static int bossHealth = 1000;
     public static int bossStrike = 50;
     public static String superStrike;
     public static int roundNumber = 0;
@@ -41,21 +41,25 @@ public class Main {
 
     }
     public static void medicHeal() {
-        if (heroesHealth[3] > 0) {
-        Random randomMedic = new Random();
-        int randomIndex = randomMedic.nextInt(heroesNames.length);
-            for (int i = 0; i < heroesHealth[randomIndex]; i++) {
-                if (heroesHealth[randomIndex] != heroesHealth[3]) {
-                    if (heroesHealth[randomIndex] < 100 && heroesHealth[randomIndex] > 0) {
-                        heroesHealth[randomIndex] = heroesHealth[randomIndex] + 100;
-                        System.out.println("медик вылечил " + heroesNames[randomIndex] + " на 100");
-                    }
+        Random random = new Random();
+        int randomHealth = random.nextInt(150) + 20;
+        int randomIndex = random.nextInt(heroesHealth.length);
+
+        for (int i = 0; i < heroesHealth.length; i++) {
+            if (heroesHealth[i] == heroesHealth[3]) {
+                break;
+            }
+            if (heroesHealth[3]>0 && heroesHealth[randomIndex]<100 && heroesHealth[randomIndex] >0 ) {
+                if (heroesHealth[i] == heroesHealth[randomIndex]) {
+                    heroesHealth[randomIndex] += randomHealth;
+                    System.out.println("medic вылечил " + heroesNames[i] + " на " + randomHealth);
+                }
             }
 
-
-
-            }
         }
+
+
+
     }
     public static boolean  isGameFinished() {
         if (bossHealth == 10 ) {
